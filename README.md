@@ -25,6 +25,8 @@ $ gem install microsoft_computer_vision
 ## Usage
 
 ```ruby
+require 'microsoft_computer_vision'
+
 client = MicrosoftComputerVision::Client.new('your_subscription_key')
 
 res = client.analyze({
@@ -35,6 +37,11 @@ res = client.analyze({
 
 puts res.description
 ```
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/henteko/microsoft_computer_vision.
+
 
 ## License
 

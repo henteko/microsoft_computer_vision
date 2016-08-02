@@ -1,3 +1,12 @@
 .idea/
 microsoft_computer_vision.iml
 .DS_Store
+.bundle/
+.yardoc
+Gemfile.lock
+_yardoc/
+coverage/
+doc/
+pkg/
+spec/reports/
+tmp/
