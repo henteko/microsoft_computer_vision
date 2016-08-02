@@ -25,3 +25,4 @@ response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https'
 end
 
 puts response.body
+# {"description":{"tags":["person","indoor","clothing","table","smiling","front","young","sitting","woman","white","girl","holding","hair","wooden","shirt","posing","wearing","plate","standing","phone","room"],"captions":[{"text":"a smiling woman posing for a picture","confidence":0.36090161372895907}]},"requestId":"1e726866-8c08-4c8d-b7c7-61a6085bd621","metadata":{"width":1280,"height":720,"format":"Jpeg"}}
