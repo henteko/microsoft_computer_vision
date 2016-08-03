@@ -10,6 +10,11 @@ module MicrosoftComputerVision
       @subscription_key = subscription_key
     end
 
+    ###############################################################################################################
+    # Analyze
+    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fa
+    ###############################################################################################################
+
     def analyze_image_url(image_url, options)
       analyze = Api::Analyze.new(options[:visual_features], options[:details])
       request_image_url(analyze.uri, image_url)
@@ -19,6 +24,32 @@ module MicrosoftComputerVision
       analyze = Api::Analyze.new(options[:visual_features], options[:details])
       request_image_file(analyze.uri, image_file)
     end
+
+    ###############################################################################################################
+    # TODO: Describe
+    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fe
+    ###############################################################################################################
+
+    ###############################################################################################################
+    # TODO: Thumbnail
+    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fb
+    ###############################################################################################################
+
+    ###############################################################################################################
+    # TODO: Domain Models
+    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fd
+    #       https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e200
+    ###############################################################################################################
+
+    ###############################################################################################################
+    # TODO: OCR
+    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fc
+    ###############################################################################################################
+
+    ###############################################################################################################
+    # TODO: Tag
+    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1ff
+    ###############################################################################################################
 
     private
 
