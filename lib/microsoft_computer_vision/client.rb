@@ -114,12 +114,8 @@ module MicrosoftComputerVision
 
     def get(uri, body)
       request = Net::HTTP::Get.new(uri.request_uri)
-      request['Ocp-Apim-Subscription-Key'] = @subscription_key
-      request.body = body
 
-      Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
-        http.request(request)
-      end
+      start(uri, body, request)
     end
 
     def post_image_file(uri, image_file)
@@ -133,6 +129,11 @@ module MicrosoftComputerVision
     def post(uri, content_type, body)
       request = Net::HTTP::Post.new(uri.request_uri)
       request['Content-Type'] = content_type
+
+      start(uri, body, request)
+    end
+
+    def start(uri, body, request)
       request['Ocp-Apim-Subscription-Key'] = @subscription_key
       request.body = body
 
