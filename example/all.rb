@@ -55,8 +55,8 @@ def thumbnail
   puts 'Thumbnail'
 
   options = {
-      width: '400',
-      height: '400',
+      width: 400,
+      height: 400,
       smart_cropping: true
   }
 
