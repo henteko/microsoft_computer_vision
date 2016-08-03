@@ -1,6 +1,3 @@
-require 'net/http'
-require 'json'
-
 module MicrosoftComputerVision
   class Client
 

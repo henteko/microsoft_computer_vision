@@ -1,3 +1,10 @@
+require 'uri'
+require 'net/http'
+require 'json'
+
+module MicrosoftComputerVision
+end
+
 require 'microsoft_computer_vision/version'
 require 'microsoft_computer_vision/client'
 require 'microsoft_computer_vision/api/analyze'
@@ -7,6 +14,3 @@ require 'microsoft_computer_vision/api/domain_model'
 require 'microsoft_computer_vision/api/domain_models'
 require 'microsoft_computer_vision/api/ocr'
 require 'microsoft_computer_vision/api/tag'
-
-module MicrosoftComputerVision
-end
