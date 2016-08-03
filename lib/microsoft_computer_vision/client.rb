@@ -17,18 +17,28 @@ module MicrosoftComputerVision
 
     def analyze_image_url(image_url, options)
       analyze = Api::Analyze.new(options[:visual_features], options[:details])
-      request_image_url(analyze.uri, image_url)
+      post_image_url(analyze.uri, image_url)
     end
 
     def analyze_image_file(image_file, options)
       analyze = Api::Analyze.new(options[:visual_features], options[:details])
-      request_image_file(analyze.uri, image_file)
+      post_image_file(analyze.uri, image_file)
     end
 
     ###############################################################################################################
-    # TODO: Describe
+    # Describe
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fe
     ###############################################################################################################
+
+    def describe_image_url(image_url, options)
+      describe = Api::Describe.new(options[:max_candidates])
+      post_image_url(describe.uri, image_url)
+    end
+
+    def describe_image_file(image_file, options)
+      describe = Api::Describe.new(options[:max_candidates])
+      post_image_file(describe.uri, image_file)
+    end
 
     ###############################################################################################################
     # TODO: Thumbnail
@@ -53,15 +63,15 @@ module MicrosoftComputerVision
 
     private
 
-    def request_image_file(uri, image_file)
-      request(uri, 'application/octet-stream', image_file)
+    def post_image_file(uri, image_file)
+      post(uri, 'application/octet-stream', image_file)
     end
 
-    def request_image_url(uri, image_url)
-      request(uri, 'application/json', {url: image_url}.to_json)
+    def post_image_url(uri, image_url)
+      post(uri, 'application/json', {url: image_url}.to_json)
     end
 
-    def request(uri, content_type, body)
+    def post(uri, content_type, body)
       request = Net::HTTP::Post.new(uri.request_uri)
       request['Content-Type'] = content_type
       request['Ocp-Apim-Subscription-Key'] = @subscription_key
