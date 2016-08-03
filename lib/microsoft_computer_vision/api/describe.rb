@@ -1,3 +1,5 @@
+require 'uri'
+
 module MicrosoftComputerVision::Api
   class Describe
 
