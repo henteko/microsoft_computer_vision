@@ -11,3 +11,6 @@ pkg/
 spec/reports/
 tmp/
 *.gem
+
+example/thumbnail_from_image_file.jpg
+example/thumbnail_from_image_url.jpg

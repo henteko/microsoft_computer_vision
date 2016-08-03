@@ -1,7 +1,7 @@
 module MicrosoftComputerVision::Api
   class DomainModel
 
-    ENDPOINT = '/model'
+    ENDPOINT = '/models'
 
     def initialize(model)
       @model = model
