@@ -81,6 +81,16 @@ module MicrosoftComputerVision
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1ff
     ###############################################################################################################
 
+    def tag_image_url(image_url)
+      tag = Api::Tag.new()
+      post_image_url(tag.uri, image_url)
+    end
+
+    def tag_image_file(image_file)
+      tag = Api::Tag.new()
+      post_image_file(tag.uri, image_file)
+    end
+
     private
 
     def post_image_file(uri, image_file)
