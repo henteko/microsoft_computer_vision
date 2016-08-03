@@ -45,6 +45,16 @@ module MicrosoftComputerVision
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fb
     ###############################################################################################################
 
+    def thumbnail_image_url(image_url, options)
+      thumbnail = Api::Thumbnail.new(options[:width], options[:height], options[:smart_cropping])
+      post_image_url(thumbnail.uri, image_url)
+    end
+
+    def thumbnail_image_file(image_file, options)
+      thumbnail = Api::Thumbnail.new(options[:width], options[:height], options[:smart_cropping])
+      post_image_file(thumbnail.uri, image_file)
+    end
+
     ###############################################################################################################
     # TODO: Domain Models
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fd
