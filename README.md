@@ -1,5 +1,7 @@
 # Microsoft Computer Vision API
 
+[![Gem Version](https://badge.fury.io/rb/microsoft_computer_vision.svg)](https://badge.fury.io/rb/microsoft_computer_vision)
+
 This is a very basic wrapper for the [Microsoft Computer Vision API](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api).
 
 ## Installation
