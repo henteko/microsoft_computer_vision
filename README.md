@@ -28,15 +28,16 @@ $ gem install microsoft_computer_vision
 require 'microsoft_computer_vision'
 
 client = MicrosoftComputerVision::Client.new('your_subscription_key')
+options = {
+  visual_features: 'Faces',
+  details: 'Celebrities'
+}
 
-res = client.analyze({
-  visual_features: 'visualFeatures', # optional
-  details: 'details', # optional
-  image_url: 'imageURL'
-})
-
-puts res.description
+res = client.analyze_image_url('http://example.com/images/test.jpg', options)
+puts res.body
 ```
+
+Please see [example](https://github.com/henteko/microsoft_computer_vision/tree/master/example).
 
 ## Contributing
 
