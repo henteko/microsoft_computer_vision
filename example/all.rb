@@ -143,10 +143,10 @@ def tag
   end
 end
 
-# analyze
-# describe
+analyze
+describe
 thumbnail
-# domain_models
-# ocr
-# domain_model
-# tag
+domain_models
+ocr
+domain_model
+tag
