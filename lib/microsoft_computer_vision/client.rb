@@ -58,8 +58,22 @@ module MicrosoftComputerVision
     ###############################################################################################################
     # TODO: Domain Models
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fd
-    #       https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e200
     ###############################################################################################################
+
+    ###############################################################################################################
+    # TODO: Domain Model
+    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e200
+    ###############################################################################################################
+
+    def domain_model_image_url(image_url, options)
+      domain_model = Api::DomainModel.new(options[:model])
+      post_image_url(domain_model.uri, image_url)
+    end
+
+    def domain_model_image_file(image_file, options)
+      domain_model = Api::DomainModel.new(options[:model])
+      post_image_file(domain_model.uri, image_file)
+    end
 
     ###############################################################################################################
     # OCR
