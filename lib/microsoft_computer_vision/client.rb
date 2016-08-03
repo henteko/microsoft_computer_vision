@@ -66,6 +66,16 @@ module MicrosoftComputerVision
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fc
     ###############################################################################################################
 
+    def ocr_image_url(image_url, options)
+      ocr = Api::OCR.new(options[:language], options[:detect_orientation])
+      post_image_url(ocr.uri, image_url)
+    end
+
+    def ocr_image_file(image_file, options)
+      ocr = Api::OCR.new(options[:language], options[:detect_orientation])
+      post_image_file(ocr.uri, image_file)
+    end
+
     ###############################################################################################################
     # TODO: Tag
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1ff
