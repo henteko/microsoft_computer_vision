@@ -56,12 +56,17 @@ module MicrosoftComputerVision
     end
 
     ###############################################################################################################
-    # TODO: Domain Models
+    # Domain Models
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fd
     ###############################################################################################################
 
+    def domain_models
+      domain_models = Api::DomainModels.new()
+      get(domain_models.uri, {}.to_json)
+    end
+
     ###############################################################################################################
-    # TODO: Domain Model
+    # Domain Model
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e200
     ###############################################################################################################
 
@@ -106,6 +111,16 @@ module MicrosoftComputerVision
     end
 
     private
+
+    def get(uri, body)
+      request = Net::HTTP::Get.new(uri.request_uri)
+      request['Ocp-Apim-Subscription-Key'] = @subscription_key
+      request.body = body
+
+      Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+        http.request(request)
+      end
+    end
 
     def post_image_file(uri, image_file)
       post(uri, 'application/octet-stream', image_file)
