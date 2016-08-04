@@ -3,7 +3,7 @@ module MicrosoftComputerVision
     include Commander::Methods
 
     def get_subscription_key(options)
-      key = options[:subscription_key] || ENV['SUBSCRIPTION_KEY']
+      key = options.subscription_key || ENV['SUBSCRIPTION_KEY']
       if key.nil?
         puts 'Please input your Subscription Key (--subscription_key or SUBSCRIPTION_KEY env)'
         exit
@@ -20,13 +20,13 @@ module MicrosoftComputerVision
       command 'analyze' do |c|
         c.syntax = 'mscv analyze /path/to/image'
         c.description = 'Microsoft Computer Vision API Analyze'
-        c.option '--subscription_key STRING', 'Microsoft Computer Vision API Subscription Key'
-        c.option '--visual_features STRING', 'visualFeatures param'
-        c.option '--details STRING', 'details param'
+        c.option '--subscription_key STRING', String, 'Microsoft Computer Vision API Subscription Key'
+        c.option '--visual_features STRING', String, 'visualFeatures param'
+        c.option '--details STRING', String, 'details param'
         c.action do |args, options|
           result = MicrosoftComputerVision::Client.new(get_subscription_key(options)).analyze(args.first, {
-              visual_features: options[:visual_features],
-              details: options[:details]
+              visual_features: options.visual_features,
+              details: options.details
           })
 
           puts result.body
@@ -36,11 +36,11 @@ module MicrosoftComputerVision
       command 'describe' do |c|
         c.syntax = 'mscv describe /path/to/image'
         c.description = 'Microsoft Computer Vision API Describe'
-        c.option '--subscription_key STRING', 'Microsoft Computer Vision API Subscription Key'
-        c.option '--max_candidates STRING', 'maxCandidates param'
+        c.option '--subscription_key STRING', String, 'Microsoft Computer Vision API Subscription Key'
+        c.option '--max_candidates STRING', String, 'maxCandidates param'
         c.action do |args, options|
           result = MicrosoftComputerVision::Client.new(get_subscription_key(options)).describe(args.first, {
-              max_candidates: options[:max_candidates]
+              max_candidates: options.max_candidates
           })
 
           puts result.body
@@ -50,16 +50,16 @@ module MicrosoftComputerVision
       command 'thumbnail' do |c|
         c.syntax = 'mscv thumbnail /path/to/image'
         c.description = 'Microsoft Computer Vision API Get Thumbnail'
-        c.option '--subscription_key STRING', 'Microsoft Computer Vision API Subscription Key'
-        c.option '--width STRING', 'width param'
-        c.option '--height STRING', 'height param'
+        c.option '--subscription_key STRING', String, 'Microsoft Computer Vision API Subscription Key'
+        c.option '--width STRING', String, 'width param'
+        c.option '--height STRING', String, 'height param'
         c.option '--smart_cropping', 'smartCropping param'
         c.action do |args, options|
           options.default smart_cropping: true
           result = MicrosoftComputerVision::Client.new(get_subscription_key(options)).thumbnail(args.first, {
-              width: options[:width],
-              height: options[:height],
-              smart_cropping: options[:smart_cropping]
+              width: options.width,
+              height: options.height,
+              smart_cropping: options.smart_cropping
           })
 
           puts result.body
@@ -69,14 +69,14 @@ module MicrosoftComputerVision
       command 'ocr' do |c|
         c.syntax = 'mscv ocr /path/to/image'
         c.description = 'Microsoft Computer Vision API OCR'
-        c.option '--subscription_key STRING', 'Microsoft Computer Vision API Subscription Key'
-        c.option '--language STRING', 'language param'
+        c.option '--subscription_key STRING', String, 'Microsoft Computer Vision API Subscription Key'
+        c.option '--language STRING', String, 'language param'
         c.option '--detect_orientation', 'detectOrientation param'
         c.action do |args, options|
           options.default detect_orientation: true
           result = MicrosoftComputerVision::Client.new(get_subscription_key(options)).ocr(args.first, {
-              language: options[:language],
-              detect_orientation: options[:detect_orientation]
+              language: options.language,
+              detect_orientation: options.detect_orientation
           })
 
           puts result.body
@@ -86,11 +86,11 @@ module MicrosoftComputerVision
       command 'model' do |c|
         c.syntax = 'mscv model /path/to/image'
         c.description = 'Microsoft Computer Vision API Domain Model'
-        c.option '--subscription_key STRING', 'Microsoft Computer Vision API Subscription Key'
-        c.option '--model STRING', 'model param'
+        c.option '--subscription_key STRING', String, 'Microsoft Computer Vision API Subscription Key'
+        c.option '--model STRING', String, 'model param'
         c.action do |args, options|
           result = MicrosoftComputerVision::Client.new(get_subscription_key(options)).domain_model(args.first, {
-              model: options[:model]
+              model: options.model
           })
 
           puts result.body
@@ -100,7 +100,7 @@ module MicrosoftComputerVision
       command 'tag' do |c|
         c.syntax = 'mscv tag /path/to/image'
         c.description = 'Microsoft Computer Vision API Tag'
-        c.option '--subscription_key STRING', 'Microsoft Computer Vision API Subscription Key'
+        c.option '--subscription_key STRING', String, 'Microsoft Computer Vision API Subscription Key'
         c.action do |args, options|
           result = MicrosoftComputerVision::Client.new(get_subscription_key(options)).tag(args.first)
 
@@ -111,7 +111,7 @@ module MicrosoftComputerVision
       command 'models' do |c|
         c.syntax = 'mscv models'
         c.description = 'Microsoft Computer Vision API Domain Models'
-        c.option '--subscription_key STRING', 'Microsoft Computer Vision API Subscription Key'
+        c.option '--subscription_key STRING', String, 'Microsoft Computer Vision API Subscription Key'
         c.action do |args, options|
           result = MicrosoftComputerVision::Client.new(get_subscription_key(options)).domain_models
 
