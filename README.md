@@ -35,7 +35,7 @@ options = {
   details: 'Celebrities'
 }
 
-res = client.analyze_image_url('http://example.com/images/test.jpg', options)
+res = client.analyze('http://example.com/images/test.jpg', options)
 puts res.body
 ```
 

@@ -12,14 +12,9 @@ module MicrosoftComputerVision
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fa
     ###############################################################################################################
 
-    def analyze_image_url(image_url, options)
+    def analyze(image_path, options)
       analyze = Api::Analyze.new(options[:visual_features], options[:details])
-      post_image_url(analyze.uri, image_url)
-    end
-
-    def analyze_image_file(image_file, options)
-      analyze = Api::Analyze.new(options[:visual_features], options[:details])
-      post_image_file(analyze.uri, image_file)
+      post_image_path(analyze.uri, image_path)
     end
 
     ###############################################################################################################
@@ -27,14 +22,9 @@ module MicrosoftComputerVision
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fe
     ###############################################################################################################
 
-    def describe_image_url(image_url, options)
+    def describe(image_path, options)
       describe = Api::Describe.new(options[:max_candidates])
-      post_image_url(describe.uri, image_url)
-    end
-
-    def describe_image_file(image_file, options)
-      describe = Api::Describe.new(options[:max_candidates])
-      post_image_file(describe.uri, image_file)
+      post_image_path(describe.uri, image_path)
     end
 
     ###############################################################################################################
@@ -42,14 +32,9 @@ module MicrosoftComputerVision
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fb
     ###############################################################################################################
 
-    def thumbnail_image_url(image_url, options)
+    def thumbnail(image_path, options)
       thumbnail = Api::Thumbnail.new(options[:width], options[:height], options[:smart_cropping])
-      post_image_url(thumbnail.uri, image_url)
-    end
-
-    def thumbnail_image_file(image_file, options)
-      thumbnail = Api::Thumbnail.new(options[:width], options[:height], options[:smart_cropping])
-      post_image_file(thumbnail.uri, image_file)
+      post_image_path(thumbnail.uri, image_path)
     end
 
     ###############################################################################################################
@@ -67,14 +52,9 @@ module MicrosoftComputerVision
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e200
     ###############################################################################################################
 
-    def domain_model_image_url(image_url, options)
+    def domain_model(image_path, options)
       domain_model = Api::DomainModel.new(options[:model])
-      post_image_url(domain_model.uri, image_url)
-    end
-
-    def domain_model_image_file(image_file, options)
-      domain_model = Api::DomainModel.new(options[:model])
-      post_image_file(domain_model.uri, image_file)
+      post_image_path(domain_model.uri, image_path)
     end
 
     ###############################################################################################################
@@ -82,14 +62,9 @@ module MicrosoftComputerVision
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fc
     ###############################################################################################################
 
-    def ocr_image_url(image_url, options)
+    def ocr(image_path, options)
       ocr = Api::OCR.new(options[:language], options[:detect_orientation])
-      post_image_url(ocr.uri, image_url)
-    end
-
-    def ocr_image_file(image_file, options)
-      ocr = Api::OCR.new(options[:language], options[:detect_orientation])
-      post_image_file(ocr.uri, image_file)
+      post_image_path(ocr.uri, image_path)
     end
 
     ###############################################################################################################
@@ -97,26 +72,28 @@ module MicrosoftComputerVision
     # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1ff
     ###############################################################################################################
 
-    def tag_image_url(image_url)
+    def tag(image_path)
       tag = Api::Tag.new()
-      post_image_url(tag.uri, image_url)
-    end
-
-    def tag_image_file(image_file)
-      tag = Api::Tag.new()
-      post_image_file(tag.uri, image_file)
+      post_image_path(tag.uri, image_path)
     end
 
     private
 
-    def get(uri, body)
-      request = Net::HTTP::Get.new(uri.request_uri)
+    def post_image_path(uri, image_path)
+      image_uri = URI.parse(image_path)
 
-      start(uri, body, request)
+      case image_uri
+        when URI::HTTPS, URI::HTTP
+          post_image_url(uri, image_path)
+        else
+          File.open(image_path) do |image_file|
+            post_image_data(uri, image_file.read)
+          end
+      end
     end
 
-    def post_image_file(uri, image_file)
-      post(uri, 'application/octet-stream', image_file)
+    def post_image_data(uri, image_data)
+      post(uri, 'application/octet-stream', image_data)
     end
 
     def post_image_url(uri, image_url)
@@ -126,6 +103,12 @@ module MicrosoftComputerVision
     def post(uri, content_type, body)
       request = Net::HTTP::Post.new(uri.request_uri)
       request['Content-Type'] = content_type
+
+      start(uri, body, request)
+    end
+
+    def get(uri, body)
+      request = Net::HTTP::Get.new(uri.request_uri)
 
       start(uri, body, request)
     end

@@ -4,12 +4,7 @@ require 'json'
 subscription_key = ENV['SUBSCRIPTION_KEY']
 @client = MicrosoftComputerVision::Client.new(subscription_key)
 IMAGE_URL = 'https://www.pakutaso.com/shared/img/thumb/PAK105215431_TP_V.jpg'
-
-def file_open
-  File.open(File.expand_path('../test.jpg', __FILE__)) do |image_file|
-    yield(image_file)
-  end
-end
+IMAGE_FILE_PATH = File.expand_path('../test.jpg', __FILE__)
 
 # See: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fa
 def analyze
@@ -21,14 +16,12 @@ def analyze
   }
 
   # image url
-  res = @client.analyze_image_url(IMAGE_URL, options)
+  res = @client.analyze(IMAGE_URL, options)
   puts res.body
 
   # image file
-  file_open do |image_file|
-    res = @client.analyze_image_file(image_file.read, options)
-    puts res.body
-  end
+  res = @client.analyze(IMAGE_FILE_PATH, options)
+  puts res.body
 end
 
 # See: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fe
@@ -40,14 +33,12 @@ def describe
   }
 
   # image url
-  res = @client.describe_image_url(IMAGE_URL, options)
+  res = @client.describe(IMAGE_URL, options)
   puts res.body
 
   # image file
-  file_open do |image_file|
-    res = @client.describe_image_file(image_file.read, options)
-    puts res.body
-  end
+  res = @client.describe(IMAGE_FILE_PATH, options)
+  puts res.body
 end
 
 # See: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fb
@@ -61,19 +52,17 @@ def thumbnail
   }
 
   # image url
-  res = @client.thumbnail_image_url(IMAGE_URL, options)
+  res = @client.thumbnail(IMAGE_URL, options)
   out = File.expand_path('../thumbnail_from_image_url.jpg', __FILE__)
   File.write out, res.body
   puts "Created #{out}"
 
   # image file
-  file_open do |image_file|
-    out = File.expand_path('../thumbnail_from_image_file.jpg', __FILE__)
+  out = File.expand_path('../thumbnail_from_image_file.jpg', __FILE__)
 
-    res = @client.thumbnail_image_file(image_file.read, options)
-    File.write out, res.body
-    puts "Created #{out}"
-  end
+  res = @client.thumbnail(IMAGE_FILE_PATH, options)
+  File.write out, res.body
+  puts "Created #{out}"
 end
 
 # See: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fd
@@ -94,14 +83,12 @@ def ocr
   }
 
   # image url
-  res = @client.ocr_image_url(IMAGE_URL, options)
+  res = @client.ocr(IMAGE_URL, options)
   puts res.body
 
   # image file
-  file_open do |image_file|
-    res = @client.ocr_image_file(image_file.read, options)
-    puts res.body
-  end
+  res = @client.ocr(IMAGE_FILE_PATH, options)
+  puts res.body
 end
 
 # See: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e200
@@ -118,14 +105,12 @@ def domain_model
   }
 
   # image url
-  res = @client.domain_model_image_url(IMAGE_URL, options)
+  res = @client.domain_model(IMAGE_URL, options)
   puts res.body
 
   # image file
-  file_open do |image_file|
-    res = @client.domain_model_image_file(image_file.read, options)
-    puts res.body
-  end
+  res = @client.domain_model(IMAGE_FILE_PATH, options)
+  puts res.body
 end
 
 # See: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1ff
@@ -133,14 +118,12 @@ def tag
   puts 'Tag'
 
   # image url
-  res = @client.tag_image_url(IMAGE_URL)
+  res = @client.tag(IMAGE_URL)
   puts res.body
 
   # image file
-  file_open do |image_file|
-    res = @client.tag_image_file(image_file.read)
-    puts res.body
-  end
+  res = @client.tag(IMAGE_FILE_PATH)
+  puts res.body
 end
 
 analyze
