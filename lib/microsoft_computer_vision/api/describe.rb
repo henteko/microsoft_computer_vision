@@ -18,7 +18,7 @@ module MicrosoftComputerVision::Api
 
     def params
       data = {}
-      data[:maxCandidates] = @max_candidates if @max_candidates
+      data[:maxCandidates] = @max_candidates unless @max_candidates.nil?
 
       data
     end

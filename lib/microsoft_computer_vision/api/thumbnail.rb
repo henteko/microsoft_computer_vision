@@ -20,9 +20,9 @@ module MicrosoftComputerVision::Api
 
     def params
       data = {}
-      data[:width] = @width if @width
-      data[:height] = @height if @height
-      data[:smartCropping] = @smart_cropping if @smart_cropping
+      data[:width] = @width unless @width.nil?
+      data[:height] = @height unless @height.nil?
+      data[:smartCropping] = @smart_cropping unless @smart_cropping.nil?
 
       data
     end

@@ -19,8 +19,8 @@ module MicrosoftComputerVision::Api
 
     def params
       data = {}
-      data[:language] = @language if @language
-      data[:detectOrientation] = @detect_orientation if @detect_orientation
+      data[:language] = @language unless @language.nil?
+      data[:detectOrientation] = @detect_orientation unless @detect_orientation.nil?
 
       data
     end

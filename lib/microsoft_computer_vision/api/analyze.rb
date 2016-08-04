@@ -19,8 +19,8 @@ module MicrosoftComputerVision::Api
 
     def params
       data = {}
-      data[:visualFeatures] = @visual_features if @visual_features
-      data[:details] = @details if @details
+      data[:visualFeatures] = @visual_features unless @visual_features.nil?
+      data[:details] = @details unless @details.nil?
 
       data
     end
