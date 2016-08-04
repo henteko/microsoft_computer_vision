@@ -52,8 +52,8 @@ module MicrosoftComputerVision
         c.description = 'Microsoft Computer Vision API Get Thumbnail'
         c.option '--subscription_key STRING', String, 'Microsoft Computer Vision API Subscription Key'
         c.option '--output STRING', String, 'Output thumbnail path'
-        c.option '--width SECONDS', Integer, 'width param'
-        c.option '--height SECONDS', Integer, 'height param'
+        c.option '--width INTEGER', Integer, 'width param'
+        c.option '--height INTEGER', Integer, 'height param'
         c.option '--smart_cropping', 'smartCropping param'
         c.action do |args, options|
           options.default smart_cropping: true, output: './out.jpg'
