@@ -12,10 +12,11 @@ Gem::Specification.new do |spec|
   spec.summary       = 'This is a very basic wrapper for the Microsoft Computer Vision API.'
   spec.description   = 'This is a very basic wrapper for the Microsoft Computer Vision API.'
   spec.homepage      = 'https://github.com/henteko/microsoft_computer_vision'
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/).reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = 'exe'
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
   spec.add_dependency 'commander', '~> 4.4.0'
