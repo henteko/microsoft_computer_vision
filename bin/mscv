@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'microsoft_computer_vision'
+
+MicrosoftComputerVision::CommandBuilder.new().run

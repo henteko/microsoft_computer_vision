@@ -1,6 +1,7 @@
 require 'uri'
 require 'net/http'
 require 'json'
+require 'commander'
 
 module MicrosoftComputerVision
 end
@@ -14,3 +15,4 @@ require 'microsoft_computer_vision/api/domain_model'
 require 'microsoft_computer_vision/api/domain_models'
 require 'microsoft_computer_vision/api/ocr'
 require 'microsoft_computer_vision/api/tag'
+require 'microsoft_computer_vision/command_builder'
