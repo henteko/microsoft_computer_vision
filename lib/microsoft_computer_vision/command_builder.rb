@@ -54,7 +54,7 @@ module MicrosoftComputerVision
         c.option '--output STRING', String, 'Output thumbnail path'
         c.option '--width INTEGER', Integer, 'width param'
         c.option '--height INTEGER', Integer, 'height param'
-        c.option '--smart_cropping', 'smartCropping param'
+        c.option '--smart_cropping BOOLEAN', 'smartCropping param'
         c.action do |args, options|
           options.default smart_cropping: true, output: './out.jpg'
 
