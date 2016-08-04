@@ -51,18 +51,26 @@ module MicrosoftComputerVision
         c.syntax = 'mscv thumbnail /path/to/image'
         c.description = 'Microsoft Computer Vision API Get Thumbnail'
         c.option '--subscription_key STRING', String, 'Microsoft Computer Vision API Subscription Key'
-        c.option '--width STRING', String, 'width param'
-        c.option '--height STRING', String, 'height param'
+        c.option '--output STRING', String, 'Output thumbnail path'
+        c.option '--width SECONDS', Integer, 'width param'
+        c.option '--height SECONDS', Integer, 'height param'
         c.option '--smart_cropping', 'smartCropping param'
         c.action do |args, options|
-          options.default smart_cropping: true
+          options.default smart_cropping: true, output: './out.jpg'
+
+          if options.width.nil? || options.height.nil?
+            puts 'Please input width and height(--width, --height)'
+            exit
+          end
+
           result = MicrosoftComputerVision::Client.new(get_subscription_key(options)).thumbnail(args.first, {
               width: options.width,
               height: options.height,
               smart_cropping: options.smart_cropping
           })
 
-          puts result.body
+          File.write options.output, result.body
+          puts "Created #{options.output}"
         end
       end
 
