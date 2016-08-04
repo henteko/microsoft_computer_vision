@@ -7,70 +7,35 @@ module MicrosoftComputerVision
       @subscription_key = subscription_key
     end
 
-    ###############################################################################################################
-    # Analyze
-    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fa
-    ###############################################################################################################
-
     def analyze(image_path, options)
       analyze = Api::Analyze.new(options[:visual_features], options[:details])
       post_image_path(analyze.uri, image_path)
     end
-
-    ###############################################################################################################
-    # Describe
-    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fe
-    ###############################################################################################################
 
     def describe(image_path, options)
       describe = Api::Describe.new(options[:max_candidates])
       post_image_path(describe.uri, image_path)
     end
 
-    ###############################################################################################################
-    # Thumbnail
-    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fb
-    ###############################################################################################################
-
     def thumbnail(image_path, options)
       thumbnail = Api::Thumbnail.new(options[:width], options[:height], options[:smart_cropping])
       post_image_path(thumbnail.uri, image_path)
     end
-
-    ###############################################################################################################
-    # Domain Models
-    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fd
-    ###############################################################################################################
 
     def domain_models
       domain_models = Api::DomainModels.new()
       get(domain_models.uri, {}.to_json)
     end
 
-    ###############################################################################################################
-    # Domain Model
-    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e200
-    ###############################################################################################################
-
     def domain_model(image_path, options)
       domain_model = Api::DomainModel.new(options[:model])
       post_image_path(domain_model.uri, image_path)
     end
 
-    ###############################################################################################################
-    # OCR
-    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fc
-    ###############################################################################################################
-
     def ocr(image_path, options)
       ocr = Api::OCR.new(options[:language], options[:detect_orientation])
       post_image_path(ocr.uri, image_path)
     end
-
-    ###############################################################################################################
-    # Tag
-    # Docs: https://dev.projectoxford.ai/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1ff
-    ###############################################################################################################
 
     def tag(image_path)
       tag = Api::Tag.new()
