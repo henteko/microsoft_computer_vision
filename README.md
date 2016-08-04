@@ -27,6 +27,14 @@ $ gem install microsoft_computer_vision
     
 ## Usage
 
+### CLI
+
+```
+$ mscv analyze /path/to/image --subscription_key your_subscription_key
+```
+
+### Ruby
+
 ```ruby
 require 'microsoft_computer_vision'
 
