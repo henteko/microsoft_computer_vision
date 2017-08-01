@@ -1,45 +1,43 @@
 module MicrosoftComputerVision
   class Client
-
-    API_BASE = 'https://api.projectoxford.ai/vision/v1.0'
-
-    def initialize(subscription_key)
+    def initialize(subscription_key, location = "westus")
       @subscription_key = subscription_key
+      @api_base_url = "https://#{location}.api.cognitive.microsoft.com/vision/v1.0"
     end
 
     def analyze(image_path, options)
       analyze = Api::Analyze.new(options[:visual_features], options[:details])
-      post_image_path(analyze.uri, image_path)
+      post_image_path(analyze.uri(@api_base_url), image_path)
     end
 
     def describe(image_path, options)
       describe = Api::Describe.new(options[:max_candidates])
-      post_image_path(describe.uri, image_path)
+      post_image_path(describe.uri(@api_base_url), image_path)
     end
 
     def thumbnail(image_path, options)
       thumbnail = Api::Thumbnail.new(options[:width], options[:height], options[:smart_cropping])
-      post_image_path(thumbnail.uri, image_path)
+      post_image_path(thumbnail.uri(@api_base_url), image_path)
     end
 
     def domain_models
       domain_models = Api::DomainModels.new()
-      get(domain_models.uri, {}.to_json)
+      get(domain_models.uri(@api_base_url), {}.to_json)
     end
 
     def domain_model(image_path, options)
       domain_model = Api::DomainModel.new(options[:model])
-      post_image_path(domain_model.uri, image_path)
+      post_image_path(domain_model.uri(@api_base_url), image_path)
     end
 
     def ocr(image_path, options)
       ocr = Api::OCR.new(options[:language], options[:detect_orientation])
-      post_image_path(ocr.uri, image_path)
+      post_image_path(ocr.uri(@api_base_url), image_path)
     end
 
     def tag(image_path)
       tag = Api::Tag.new()
-      post_image_path(tag.uri, image_path)
+      post_image_path(tag.uri(@api_base_url), image_path)
     end
 
     private
