@@ -9,8 +9,8 @@ module MicrosoftComputerVision::Api
       @model = model
     end
 
-    def uri
-      URI("#{MicrosoftComputerVision::Client::API_BASE}#{ENDPOINT}/#{@model}/analyze")
+    def uri(api_base_url)
+      URI("#{api_base_url}#{ENDPOINT}/#{@model}/analyze")
     end
   end
 end

@@ -10,8 +10,8 @@ module MicrosoftComputerVision::Api
       @detect_orientation = detect_orientation
     end
 
-    def uri
-      uri = URI("#{MicrosoftComputerVision::Client::API_BASE}#{ENDPOINT}")
+    def uri(api_base_url)
+      uri = URI("#{api_base_url}#{ENDPOINT}")
       uri.query = URI.encode_www_form(params)
 
       uri
